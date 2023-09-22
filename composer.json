@@ -14,6 +14,9 @@
             "email": "software@frdl.de"
         }
     ],
+    "provide" : {
+         "mnsami/composer-installers-extender" : "dev-master"
+    },
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.3",
