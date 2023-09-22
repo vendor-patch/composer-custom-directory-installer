@@ -34,14 +34,14 @@ class PackageUtils
         if ($composer->getPackage()) {
             $extra = $composer->getPackage()->getExtra();
             if(!empty($extra['installer-paths'])) {
-                $customPath = self::mapCustomInstallPaths($extra['installer-paths'], $prettyName);
+                $customPath = self::mapCustomInstallPaths($extra['installer-paths'], $prettyName, $type);
                 if(false !== $customPath) {
                     return self::templatePath($customPath, $availableVars);
                 }
             }
         }
 
-        return NULL;
+        return false;
     }
 
     /**
@@ -72,10 +72,10 @@ class PackageUtils
      * @param  string $name
      * @return string
      */
-    protected static function mapCustomInstallPaths(array $paths, $name)
+    protected static function mapCustomInstallPaths(array $paths, $name, $type)
     {
         foreach ($paths as $path => $names) {
-            if (in_array($name, $names)) {
+            if (in_array($name, $names) || in_array('type:'.$type, $names) ) {
                 return $path;
             }
         }
