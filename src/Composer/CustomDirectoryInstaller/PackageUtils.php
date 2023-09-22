@@ -4,12 +4,17 @@ namespace Composer\CustomDirectoryInstaller;
 
 use Composer\Composer;
 use Composer\Package\PackageInterface;
+use Composer\Installer\LibraryInstaller as LibraryBaseInstaller;
+use OomphInc\ComposerInstallersExtender\Installers\CustomInstaller as CustomInstallersExtenderInstaller;
 
 class PackageUtils
 {
     public static function getPackageInstallPath(PackageInterface $package, Composer $composer)
     {
         $prettyName = $package->getPrettyName();
+        $type = $package->getType();
+
+        $prettyName = $this->package->getPrettyName();
         if (strpos($prettyName, '/') !== false) {
             list($vendor, $name) = explode('/', $prettyName);
         } else {
@@ -17,7 +22,9 @@ class PackageUtils
             $name = $prettyName;
         }
 
-        $availableVars = compact('name', 'vendor');
+        $package_local_name = array_pop(explode('/', $name));
+        
+        $availableVars = compact('name', 'vendor', 'type', 'package_local_name');
 
         $extra = $package->getExtra();
         if (!empty($extra['installer-name'])) {
