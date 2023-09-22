@@ -14,7 +14,7 @@ class PackageUtils
         $prettyName = $package->getPrettyName();
         $type = $package->getType();
 
-        $prettyName = $this->package->getPrettyName();
+       
         if (strpos($prettyName, '/') !== false) {
             list($vendor, $name) = explode('/', $prettyName);
         } else {
@@ -28,7 +28,7 @@ class PackageUtils
 
         $extra = $package->getExtra();
         if (!empty($extra['installer-name'])) {
-            $availableVars['name'] = $extra['installer-name'];
+            $availableVars['installer_name'] = $extra['installer-name'];
         }
 
         if ($composer->getPackage()) {
