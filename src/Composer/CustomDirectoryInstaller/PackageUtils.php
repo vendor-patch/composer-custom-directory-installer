@@ -22,7 +22,8 @@ class PackageUtils
             $name = $prettyName;
         }
 
-        $package_local_name = array_pop(explode('/', $name));
+        $p = explode('/', $name);
+        $package_local_name = array_pop($p);
         
         $availableVars = compact('name', 'vendor', 'type', 'package_local_name');
 
