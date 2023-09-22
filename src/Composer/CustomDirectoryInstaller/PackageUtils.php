@@ -5,7 +5,7 @@ namespace Composer\CustomDirectoryInstaller;
 use Composer\Composer;
 use Composer\Package\PackageInterface;
 use Composer\Installer\LibraryInstaller as LibraryBaseInstaller;
-use OomphInc\ComposerInstallersExtender\Installers\CustomInstaller as CustomInstallersExtenderInstaller;
+use VendorPatch\OomphInc\ComposerInstallersExtender\Installers\CustomInstaller as CustomInstallersExtenderInstaller;
 
 class PackageUtils
 {
@@ -33,7 +33,7 @@ class PackageUtils
         }
 
         if ($composer->getPackage()) {
-            $extra = $composer->getPackage()->getExtra();
+            $extra = aray_merge_recirsive($extra, $composer->getPackage()->getExtra());
             if(!empty($extra['installer-paths'])) {
                 $customPath = self::mapCustomInstallPaths($extra['installer-paths'], $prettyName, $type);
                 if(false !== $customPath) {
