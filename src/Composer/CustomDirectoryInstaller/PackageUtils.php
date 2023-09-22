@@ -33,7 +33,7 @@ class PackageUtils
         }
 
         if ($composer->getPackage()) {
-            $extra = aray_merge_recirsive($extra, $composer->getPackage()->getExtra());
+            $extra = array_merge_recursive($extra, $composer->getPackage()->getExtra());
             if(!empty($extra['installer-paths'])) {
                 $customPath = self::mapCustomInstallPaths($extra['installer-paths'], $prettyName, $type);
                 if(false !== $customPath) {
